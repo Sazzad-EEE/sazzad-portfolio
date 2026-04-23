@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin — Sazzad Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #05050f; --bg2: #0c0c1e; --glass: rgba(255,255,255,0.04);
+      --border: rgba(0,210,255,0.15); --border-h: rgba(0,210,255,0.3);
+      --cyan: #00d4ff; --purple: #7c3aed; --red: #ef4444; --green: #10b981;
+      --text: #eeeeff; --text2: #8888aa;
+      --font-h: 'Space Grotesk',sans-serif;
+      --font-b: 'Inter',sans-serif;
+      --font-m: 'JetBrains Mono',monospace;
+      --r: 12px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: var(--font-b); background: var(--bg); color: var(--text); min-height: 100vh; }
+    a { color: inherit; text-decoration: none; }
+    svg { display: block; width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* ── Login Screen ── */
+    #loginScreen {
+      position: fixed; inset: 0; display: flex; align-items: center; justify-content: center;
+      background: var(--bg); z-index: 100;
+    }
+    #loginScreen.hidden { display: none; }
+    .login-card {
+      width: 100%; max-width: 400px; padding: 48px 40px;
+      background: var(--glass); border: 1px solid var(--border);
+      border-radius: 20px; backdrop-filter: blur(12px); text-align: center;
+    }
+    .login-logo { font-family: var(--font-m); font-size: 2rem; color: var(--cyan); margin-bottom: 8px; }
+    .login-sub  { font-size: 0.85rem; color: var(--text2); margin-bottom: 36px; }
+    .form-group { margin-bottom: 20px; text-align: left; }
+    label { display: block; font-size: 0.78rem; color: var(--text2); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; }
+    input[type="password"], input[type="text"], textarea, select {
+      width: 100%; background: rgba(255,255,255,0.06); border: 1px solid var(--border);
+      border-radius: var(--r); padding: 12px 16px; color: var(--text); font-family: var(--font-b); font-size: 0.9rem;
+      outline: none; transition: border-color 0.2s;
+    }
+    input:focus, textarea:focus, select:focus { border-color: var(--cyan); }
+    textarea { resize: vertical; min-height: 100px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 11px 22px; border-radius: 100px; border: none;
+      font-family: var(--font-b); font-size: 0.875rem; font-weight: 500;
+      cursor: pointer; transition: all 0.2s; white-space: nowrap;
+    }
+    .btn-cyan { background: var(--cyan); color: #000; }
+    .btn-cyan:hover { background: #33ddff; transform: translateY(-1px); }
+    .btn-ghost { background: var(--glass); color: var(--text); border: 1px solid var(--border); }
+    .btn-ghost:hover { border-color: var(--border-h); background: rgba(255,255,255,0.07); }
+    .btn-red  { background: rgba(239,68,68,0.15); color: var(--red); border: 1px solid rgba(239,68,68,0.3); }
+    .btn-red:hover  { background: rgba(239,68,68,0.25); }
+    .btn-green{ background: rgba(16,185,129,0.15); color: var(--green); border: 1px solid rgba(16,185,129,0.3); }
+    .btn-green:hover{ background: rgba(16,185,129,0.25); }
+    .btn-full { width: 100%; justify-content: center; }
+    #loginError { color: var(--red); font-size: 0.82rem; margin-top: 12px; display: none; }
+
+    /* ── Admin Layout ── */
+    #adminApp { display: none; min-height: 100vh; }
+    #adminApp.show { display: flex; }
+    .sidebar {
+      width: 240px; min-height: 100vh; background: var(--bg2);
+      border-right: 1px solid var(--border); padding: 24px 0; flex-shrink: 0;
+      position: sticky; top: 0; height: 100vh; overflow-y: auto;
+    }
+    .sidebar-brand { padding: 0 20px 24px; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+    .sidebar-brand h2 { font-family: var(--font-m); font-size: 1rem; color: var(--cyan); }
+    .sidebar-brand p  { font-size: 0.75rem; color: var(--text2); margin-top: 4px; }
+    .nav-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 20px; font-size: 0.875rem; color: var(--text2);
+      cursor: pointer; transition: all 0.2s; border-left: 2px solid transparent;
+    }
+    .nav-item:hover { color: var(--text); background: var(--glass); }
+    .nav-item.active { color: var(--cyan); border-left-color: var(--cyan); background: rgba(0,212,255,0.06); }
+    .sidebar-footer { padding: 20px; border-top: 1px solid var(--border); margin-top: auto; }
+    .main { flex: 1; padding: 36px; overflow-y: auto; }
+    .main-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 36px; }
+    .main-header h1 { font-family: var(--font-h); font-size: 1.6rem; }
+    .back-link { font-size: 0.82rem; color: var(--text2); display: flex; align-items: center; gap: 6px; }
+    .back-link:hover { color: var(--cyan); }
+
+    /* Tabs */
+    .tab { display: none; }
+    .tab.active { display: block; }
+
+    /* Cards / Sections */
+    .card { background: var(--glass); border: 1px solid var(--border); border-radius: var(--r); padding: 28px; margin-bottom: 24px; }
+    .card h3 { font-family: var(--font-h); font-size: 1rem; margin-bottom: 20px; color: var(--text2); text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.78rem; }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .row.three { grid-template-columns: repeat(3, 1fr); }
+    .actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 20px; }
+
+    /* Image upload */
+    .upload-zone {
+      border: 2px dashed var(--border); border-radius: var(--r); padding: 32px;
+      text-align: center; cursor: pointer; transition: border-color 0.2s;
+    }
+    .upload-zone:hover { border-color: var(--cyan); }
+    .upload-zone input { display: none; }
+    .upload-zone p { font-size: 0.85rem; color: var(--text2); margin-top: 10px; }
+    .upload-zone .u-icon { font-size: 2.5rem; }
+    .preview-img { max-width: 200px; border-radius: 8px; border: 1px solid var(--border); margin-top: 12px; }
+
+    /* Projects list */
+    .proj-item {
+      background: var(--bg2); border: 1px solid var(--border); border-radius: var(--r);
+      padding: 20px; margin-bottom: 16px;
+    }
+    .proj-item-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+    .proj-item-head h4 { font-family: var(--font-h); font-size: 0.95rem; }
+    .proj-actions { display: flex; gap: 8px; }
+    .proj-form { display: none; margin-top: 16px; border-top: 1px solid var(--border); padding-top: 16px; }
+    .proj-form.open { display: block; }
+    .field { margin-bottom: 14px; }
+    .field label { display: block; font-size: 0.75rem; color: var(--text2); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.06em; }
+    .tag-input {
+      display: flex; gap: 8px; flex-wrap: wrap; align-items: center;
+      background: rgba(255,255,255,0.06); border: 1px solid var(--border);
+      border-radius: var(--r); padding: 8px 12px; cursor: text;
+    }
+    .tag-input:focus-within { border-color: var(--cyan); }
+    .tag-chip {
+      background: rgba(0,212,255,0.1); color: var(--cyan); border: 1px solid rgba(0,212,255,0.2);
+      padding: 3px 10px; border-radius: 6px; font-size: 0.78rem;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .tag-chip button { background: none; border: none; cursor: pointer; color: inherit; font-size: 1rem; line-height: 1; padding: 0; }
+    .tag-input input { background: none; border: none; outline: none; color: var(--text); font-size: 0.82rem; font-family: var(--font-b); min-width: 80px; }
+
+    /* Toast */
+    #toast {
+      position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%) translateY(80px);
+      background: var(--green); color: #000; padding: 12px 24px; border-radius: 100px;
+      font-size: 0.875rem; font-weight: 500; z-index: 9999; transition: transform 0.35s ease;
+    }
+    #toast.error { background: var(--red); color: white; }
+    #toast.show  { transform: translateX(-50%) translateY(0); }
+
+    /* Settings */
+    .warn { font-size: 0.8rem; color: var(--text2); margin-top: 8px; }
+    .warn strong { color: var(--cyan); }
+
+    @media (max-width: 768px) {
+      #adminApp { flex-direction: column; }
+      .sidebar { width: 100%; min-height: auto; height: auto; position: static; border-right: none; border-bottom: 1px solid var(--border); overflow-x: auto; display: flex; padding: 12px 16px; gap: 0; }
+      .sidebar-brand { display: none; }
+      .sidebar-footer { display: none; }
+      .nav-item { white-space: nowrap; border-left: none; border-bottom: 2px solid transparent; padding: 10px 14px; }
+      .nav-item.active { border-bottom-color: var(--cyan); border-left: none; }
+      .main { padding: 20px; }
+      .row { grid-template-columns: 1fr; }
+      .row.three { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Login -->
+<div id="loginScreen">
+  <div class="login-card">
+    <div class="login-logo">&lt;MSH/&gt;</div>
+    <p class="login-sub">Portfolio Admin Panel</p>
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" id="pwInput" placeholder="Enter password" autocomplete="current-password" />
+    </div>
+    <button class="btn btn-cyan btn-full" id="loginBtn">Unlock Panel</button>
+    <p id="loginError">Incorrect password. Try again.</p>
+  </div>
+</div>
+
+<!-- Admin App -->
+<div id="adminApp">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <h2>&lt;Admin/&gt;</h2>
+      <p>Sazzad Portfolio</p>
+    </div>
+    <nav>
+      <div class="nav-item active" data-tab="general">🏠 General</div>
+      <div class="nav-item" data-tab="about">👤 About</div>
+      <div class="nav-item" data-tab="projects">📁 Projects</div>
+      <div class="nav-item" data-tab="research">🔬 Research</div>
+      <div class="nav-item" data-tab="contact">📬 Contact</div>
+      <div class="nav-item" data-tab="settings">⚙️ Settings</div>
+    </nav>
+    <div class="sidebar-footer">
+      <button class="btn btn-ghost btn-full" id="logoutBtn">Log Out</button>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <main class="main">
+    <div class="main-header">
+      <h1 id="tabTitle">General</h1>
+      <a href="index.html" class="back-link">
+        <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        View Site
+      </a>
+    </div>
+
+    <!-- GENERAL TAB -->
+    <div class="tab active" id="tab-general">
+      <div class="card">
+        <h3>Hero Section</h3>
+        <div class="row">
+          <div class="form-group">
+            <label>First Name / Title Line 1</label>
+            <input type="text" id="g-firstName" />
+          </div>
+          <div class="form-group">
+            <label>Last Name / Title Line 2</label>
+            <input type="text" id="g-lastName" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Badge Text (top pill)</label>
+          <input type="text" id="g-badge" />
+        </div>
+        <div class="form-group">
+          <label>Tagline (below typing text)</label>
+          <input type="text" id="g-tagline" />
+        </div>
+        <div class="form-group">
+          <label>Typing Roles (comma-separated)</label>
+          <input type="text" id="g-roles" placeholder="Electrical Engineer, Robotics Enthusiast, ..." />
+        </div>
+        <div class="actions">
+          <button class="btn btn-cyan" id="saveGeneral">Save Changes</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ABOUT TAB -->
+    <div class="tab" id="tab-about">
+      <div class="card">
+        <h3>Profile Photo</h3>
+        <div class="upload-zone" id="photoUploadZone">
+          <input type="file" id="photoInput" accept="image/*" />
+          <div class="u-icon">🖼️</div>
+          <p>Click or drag photo here</p>
+          <p style="font-size:0.75rem;margin-top:6px;">Recommended: 3:4 portrait, max 4MB</p>
+        </div>
+        <img id="photoPreview" class="preview-img" src="" alt="" style="display:none" />
+        <div class="actions">
+          <button class="btn btn-green" id="savePhoto">Save Photo</button>
+          <button class="btn btn-red"   id="deletePhoto">Remove Photo</button>
+        </div>
+      </div>
+      <div class="card">
+        <h3>CV / Resume</h3>
+        <div class="form-group">
+          <label>CV Download URL (Google Drive / Dropbox share link)</label>
+          <input type="text" id="a-cvUrl" placeholder="https://drive.google.com/..." />
+        </div>
+        <p class="warn">Or upload PDF below — will be stored in browser. <strong>URL is more reliable for sharing.</strong></p>
+        <div class="upload-zone" id="cvUploadZone" style="margin-top:16px">
+          <input type="file" id="cvInput" accept=".pdf" />
+          <div class="u-icon">📄</div>
+          <p>Click to upload CV PDF</p>
+        </div>
+        <div class="actions">
+          <button class="btn btn-cyan"  id="saveCv">Save CV URL</button>
+          <button class="btn btn-green" id="saveCvFile">Upload PDF</button>
+          <button class="btn btn-red"   id="deleteCv">Remove CV</button>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Bio Text</h3>
+        <div class="form-group">
+          <label>Paragraph 1</label>
+          <textarea id="a-para1" rows="4"></textarea>
+        </div>
+        <div class="form-group">
+          <label>Paragraph 2</label>
+          <textarea id="a-para2" rows="4"></textarea>
+        </div>
+        <div class="actions">
+          <button class="btn btn-cyan" id="saveBio">Save Bio</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECTS TAB -->
+    <div class="tab" id="tab-projects">
+      <div class="card" style="margin-bottom:0;padding-bottom:16px">
+        <h3>Projects</h3>
+        <button class="btn btn-cyan" id="addProjectBtn">+ Add Project</button>
+      </div>
+      <div id="projectsList" style="margin-top:16px"></div>
+    </div>
+
+    <!-- RESEARCH TAB -->
+    <div class="tab" id="tab-research">
+      <div class="card">
+        <h3>Research Interest Cards</h3>
+        <p style="font-size:0.85rem;color:var(--text2);margin-bottom:20px">Edit the 6 research cards shown on the site.</p>
+        <div id="researchList"></div>
+        <div class="actions" style="margin-top:0">
+          <button class="btn btn-cyan" id="saveResearch">Save Research Cards</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTACT TAB -->
+    <div class="tab" id="tab-contact">
+      <div class="card">
+        <h3>Contact Information</h3>
+        <div class="row">
+          <div class="form-group">
+            <label>Email</label>
+            <input type="text" id="c-email" />
+          </div>
+          <div class="form-group">
+            <label>Phone</label>
+            <input type="text" id="c-phone" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Location</label>
+          <input type="text" id="c-location" />
+        </div>
+        <div class="actions">
+          <button class="btn btn-cyan" id="saveContact">Save Contact</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SETTINGS TAB -->
+    <div class="tab" id="tab-settings">
+      <div class="card">
+        <h3>Change Password</h3>
+        <div class="form-group">
+          <label>Current Password</label>
+          <input type="password" id="s-curPw" />
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <label>New Password</label>
+            <input type="password" id="s-newPw" />
+          </div>
+          <div class="form-group">
+            <label>Confirm New Password</label>
+            <input type="password" id="s-confirmPw" />
+          </div>
+        </div>
+        <div class="actions">
+          <button class="btn btn-cyan" id="changePwBtn">Update Password</button>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Data Management</h3>
+        <p style="font-size:0.85rem;color:var(--text2);margin-bottom:16px">Export or reset your portfolio content.</p>
+        <div class="actions">
+          <button class="btn btn-ghost" id="exportBtn">⬇ Export JSON Backup</button>
+          <button class="btn btn-red"   id="resetBtn">↺ Reset to Defaults</button>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div id="toast">Changes saved!</div>
+
+<script src="admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="MD. Sazzad Hossain — EEE Graduate | Digital Twin, Renewable Energy, Edge AI Research" />
+  <title>MD. Sazzad Hossain | Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+  <canvas id="particleCanvas"></canvas>
+
+  <div class="loader" id="loader">
+    <div class="loader-inner">
+      <div class="loader-monogram">MSH</div>
+      <div class="loader-track"><div class="loader-fill"></div></div>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="nav" id="nav">
+    <div class="nav-wrap">
+      <a href="#hero" class="nav-logo"><span class="lb">&lt;</span>Sazzad<span class="lb">/&gt;</span></a>
+      <button class="nav-burger" id="navBurger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about"        class="nl">About</a></li>
+        <li><a href="#education"    class="nl">Education</a></li>
+        <li><a href="#experience"   class="nl">Experience</a></li>
+        <li><a href="#publications" class="nl">Publications</a></li>
+        <li><a href="#skills"       class="nl">Skills</a></li>
+        <li><a href="#projects"     class="nl">Projects</a></li>
+        <li><a href="#contact"      class="nl">Contact</a></li>
+        <li><a href="#" class="nl nav-cv magnetic" id="navCvBtn">CV ↓</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ═══════ HERO ═══════ -->
+  <section id="hero" class="hero">
+    <div class="hero-bg">
+      <div class="grid-lines"></div>
+      <div class="orb o1"></div>
+      <div class="orb o2"></div>
+      <div class="orb o3"></div>
+    </div>
+    <div class="parallax-layer" data-depth="0.02">
+      <div class="float-shape fs1"></div><div class="float-shape fs2"></div>
+    </div>
+    <div class="parallax-layer" data-depth="0.05">
+      <div class="float-shape fs3"></div><div class="float-shape fs4"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="badge-pulse"></span>
+        <span id="heroBadge">Publication Under Review · Open to Fully Funded MS/PhD</span>
+      </div>
+      <h1 class="hero-name">
+        <span id="heroFirstName">MD. Sazzad</span>
+        <span class="accent" id="heroLastName">Hossain</span>
+      </h1>
+      <p class="hero-role">
+        <span class="type-text" id="typeText"></span><span class="type-caret">|</span>
+      </p>
+      <p class="hero-tagline" id="heroTagline">
+        EEE Graduate · Digital Twin Researcher · Edge AI · Renewable Energy Systems
+      </p>
+      <div class="hero-btns">
+        <a href="#projects"     class="btn btn-primary magnetic"><span>View Projects</span><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        <a href="#publications" class="btn btn-ghost  magnetic"><span>Publications</span></a>
+      </div>
+      <div class="hero-stats">
+        <div class="hstat">
+          <strong class="count" data-target="3.57" data-decimal="2">0</strong>
+          <span>CGPA / 4.0</span>
+        </div>
+        <div class="hstat-div"></div>
+        <div class="hstat">
+          <strong class="count" data-target="1" data-decimal="0">0</strong>
+          <span>Publication</span>
+        </div>
+        <div class="hstat-div"></div>
+        <div class="hstat">
+          <strong class="count" data-target="20" data-decimal="0">0</strong>
+          <span>Tools &amp; Frameworks</span>
+        </div>
+        <div class="hstat-div"></div>
+        <div class="hstat">
+          <strong class="count" data-target="148" data-decimal="0">0</strong>
+          <span>Credits Earned</span>
+        </div>
+      </div>
+    </div>
+    <a href="#about" class="scroll-hint">
+      <div class="scroll-mouse"><div class="scroll-dot"></div></div>
+      <span>Scroll</span>
+    </a>
+  </section>
+
+  <!-- ═══════ ABOUT ═══════ -->
+  <section id="about" class="section">
+    <div class="container">
+      <header class="sec-head">
+        <span class="sec-tag">01 — About</span>
+        <h2 class="sec-title">Who I Am</h2>
+      </header>
+      <div class="about-grid">
+        <div class="about-left reveal">
+          <div class="photo-wrap">
+            <img id="profileImg" src="" alt="MD. Sazzad Hossain" class="profile-photo hidden" />
+            <div class="photo-placeholder" id="photoPlaceholder">
+              <svg viewBox="0 0 80 80"><circle cx="40" cy="28" r="18" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 72c0-17.7 14.3-32 32-32s32 14.3 32 32" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+              <span>Photo</span>
+            </div>
+            <div class="photo-glow"></div>
+          </div>
+          <div class="contact-chips">
+            <a href="mailto:md.sazzad.eee@gmail.com" id="chipEmail" class="chip">
+              <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              <span id="chipEmailText">md.sazzad.eee@gmail.com</span>
+            </a>
+            <a href="tel:+8801303337052" id="chipPhone" class="chip">
+              <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.6 19.79 19.79 0 0 1 1.62 4.93 2 2 0 0 1 3.6 3h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l.85-.85a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              <span id="chipPhoneText">+880 01303-337052</span>
+            </a>
+            <a href="https://sazzad-eee.github.io/Portfolio/" target="_blank" class="chip">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              <span>sazzad-eee.github.io/Portfolio</span>
+            </a>
+            <div class="chip">
+              <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <span id="chipLocation">Banani, Dhaka, Bangladesh</span>
+            </div>
+          </div>
+        </div>
+        <div class="about-right reveal">
+          <p class="about-p" id="aboutPara1">
+            I am Md. Sazzad Hossain, an Electrical &amp; Electronic Engineering graduate from American International University-Bangladesh with versatile skills spanning practical electrical work and modern engineering tools. My research interests lie at the intersection of physics-informed machine learning, edge computing, and smart energy systems.
+          </p>
+          <p class="about-p" id="aboutPara2">
+            With a publication under review at TENSYMP and industry experience at Energypac Engineering Ltd., I bridge academic research with real-world engineering. My goal is to grow as a well-rounded professional — adapting to new challenges, contributing to meaningful solutions, and pursuing impactful graduate research.
+          </p>
+          <div class="lang-row">
+            <h4>Languages</h4>
+            <div class="lang-tags">
+              <span class="ltag">Bengali <em>Native</em></span>
+              <span class="ltag">English <em>C1 — Advanced</em></span>
+              <span class="ltag">Hindi <em>Working</em></span>
+            </div>
+          </div>
+          <a href="#" class="btn btn-outline magnetic" id="cvDownloadBtn">
+            <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            <span>Download CV</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════ EDUCATION ═══════ -->
+  <section id="education" class="section section-alt">
+    <div class="container">
+      <header class="sec-head">
+        <span class="sec-tag">02 — Education</span>
+        <h2 class="sec-title">Academic Journey</h2>
+      </header>
+      <div class="timeline">
+        <div class="tl-item reveal">
+          <div class="tl-dot"></div>
+          <div class="tl-card glass-card">
+            <div class="tl-top">
+              <span class="tl-emoji">🎓</span>
+              <div class="tl-meta">
+                <span class="tl-year">Jan 2022 – Dec 2025</span>
+                <span class="tl-badge">Graduating</span>
+              </div>
+            </div>
+            <h3>B.Sc. in Electrical &amp; Electronic Engineering</h3>
+            <p class="tl-dept">Faculty of Engineering · 148 Credits</p>
+            <p class="tl-school"><a href="https://www.aiub.edu/" target="_blank">American International University-Bangladesh (AIUB)</a></p>
+            <div class="tl-gpa">
+              <span>CGPA</span>
+              <strong>3.57 / 4.00</strong>
+              <div class="gpa-track"><div class="gpa-bar" style="--w:89.25%"></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="tl-item reveal">
+          <div class="tl-dot"></div>
+          <div class="tl-card glass-card">
+            <div class="tl-top">
+              <span class="tl-emoji">📚</span>
+              <div class="tl-meta"><span class="tl-year">2018 – 2021</span></div>
+            </div>
+            <h3>Higher Secondary Certificate (HSC)</h3>
+            <p class="tl-dept">Science</p>
+            <p class="tl-school"><a href="https://qcsc.edu.bd/" target="_blank">Qadirabad Cantonment Sapper College, Natore</a></p>
+            <div class="tl-gpa">
+              <span>GPA</span>
+              <strong>4.67 / 5.00</strong>
+              <div class="gpa-track"><div class="gpa-bar" style="--w:93.4%"></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="tl-item reveal">
+          <div class="tl-dot"></div>
+          <div class="tl-card glass-card">
+            <div class="tl-top">
+              <span class="tl-emoji">🏫</span>
+              <div class="tl-meta"><span class="tl-year">2016 – 2018</span></div>
+            </div>
+            <h3>Secondary School Certificate (SSC)</h3>
+            <p class="tl-dept">Science</p>
+            <p class="tl-school"><a href="https://jigorihighschool.com/en/" target="_blank">Jigori High School, Bagatipara, Natore</a></p>
+            <div class="tl-gpa">
+              <span>GPA</span>
+              <strong>4.89 / 5.00</strong>
+              <div class="gpa-track"><div class="gpa-bar" style="--w:97.8%"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════ WORK EXPERIENCE ═══════ -->
+  <section id="experience" class="section">
+    <div class="container">
+      <header class="sec-head">
+        <span class="sec-tag">03 — Experience</span>
+        <h2 class="sec-title">Industry Experience</h2>
+      </header>
+      <div class="exp-grid" id="expGrid">
+        <div class="exp-card glass-card reveal">
+          <div class="exp-header">
+            <div class="exp-logo-wrap">
+              <div class="exp-logo-placeholder">EP</div>
+            </div>
+            <div class="exp-meta">
+              <h3>Internship Trainee</h3>
+              <a href="https://www.energypac.com/epgl/" target="_blank" class="exp-company">Energypac Engineering Ltd.</a>
+              <div class="exp-details">
+                <span class="exp-loc">📍 Dhaka, Bangladesh</span>
+                <span class="exp-date">Jun 28 – Jul 21, 2025</span>
+              </div>
+            </div>
+          </div>
+          <ul class="exp-bullets">
+            <li>Hands-on manufacturing and testing of power equipment — transformers, switchgear, and protective devices</li>
+            <li>Assisted with equipment assembly, relay settings, and quality inspections</li>
+            <li>Participated in high voltage testing procedures in accordance with IEC standards</li>
+            <li>Supported testing and commissioning activities for power distribution equipment</li>
+          </ul>
+          <div class="exp-tags">
+            <span class="etag">Power Systems</span>
+            <span class="etag">HV Testing</span>
+            <span class="etag">IEC Standards</span>
+            <span class="etag">Switchgear</span>
+            <span class="etag">Transformers</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════ PUBLICATIONS ═══════ -->
+  <section id="publications" class="section section-alt">
+    <div class="container">
+      <header class="sec-head">
+        <span class="sec-tag">04 — Research Output</span>
+        <h2 class="sec-title">Publications</h2>
+        <p class="sec-sub">Peer-reviewed research contributions</p>
+      </header>
+      <div class="pub-list" id="pubList">
+        <div class="pub-card glass-card reveal">
+          <div class="pub-year-badge">2026</div>
+          <div class="pub-body">
+            <div class="pub-status-row">
+              <span class="pub-status under-review">⏳ Under Review</span>
+              <span class="pub-venue">TENSYMP</span>
+            </div>
+            <h3 class="pub-title">
+              A Physics-Informed Self-Calibrating Digital Twin with Conformal Uncertainty for Multi-Inverter Photovoltaic Systems
+            </h3>
+            <ul class="pub-bullets">
+              <li>Developed a novel physics-informed digital twin framework integrating <strong>residual learning</strong>, <strong>conformal uncertainty quantification</strong>, and <strong>online self-calibration</strong> for multi-inverter PV systems</li>
+              <li>Demonstrated improved prediction accuracy and <strong>inverter-level anomaly detection</strong> using real-world PV plant data</li>
+            </ul>
+            <div class="pub-tags">
+              <span class="ptag">Digital Twin</span>
+              <span class="ptag">Physics-Informed ML</span>
+              <span class="ptag">Conformal Prediction</span>
+              <span class="ptag">PV Systems</span>
+              <span class="ptag">Anomaly Detection</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════ SKILLS ═══════ -->
+  <section id="skills" class="section">
+    <div class="container">
+      <header class="sec-head">
+        <span class="sec-tag">05 — Skills</span>
+        <h2 class="sec-title">Technical Arsenal</h2>
+      </header>
+      <div class="skills-outer">
+        <!-- Progress bar categories -->
+        <div class="skills-bars-grid" id="skillsGrid">
+          <div class="skill-cat glass-card reveal">
+            <div class="sk-icon">💻</div>
+            <h3>Programming &amp; Data Science</h3>
+            <ul class="sk-list">
+              <li><span>Python (NumPy, Pandas, SciPy)</span><div class="sk-track"><div class="sk-bar" data-w="88"></div></div></li>
+              <li><span>TensorFlow / PyTorch</span><div class="sk-track"><div class="sk-bar" data-w="82"></div></div></li>
+              <li><span>MATLAB &amp; Simulink</span><div class="sk-track"><div class="sk-bar" data-w="85"></div></div></li>
+              <li><span>C / C++</span><div class="sk-track"><div class="sk-bar" data-w="78"></div></div></li>
+              <li><span>OpenCV / Scikit-learn</span><div class="sk-track"><div class="sk-bar" data-w="80"></div></div></li>
+            </ul>
+          </div>
+          <div class="skill-cat glass-card reveal">
+            <div class="sk-icon">⚡</div>
+            <h3>Circuit &amp; Simulation Tools</h3>
+            <ul class="sk-list">
+              <li><span>AutoCAD / AutoCAD Electrical</span><div class="sk-track"><div class="sk-bar" data-w="90"></div></div></li>
+              <li><span>Proteus / Multisim / EasyEDA</span><div class="sk-track"><div class="sk-bar" data-w="88"></div></div></li>
+              <li><span>Cadence Virtuoso</span><div class="sk-track"><div class="sk-bar" data-w="72"></div></div></li>
+              <li><span>CST Microwave Studio</span><div class="sk-track"><div class="sk-bar" data-w="68"></div></div></li>
+              <li><span>SOLIDWORKS</span><div class="sk-track"><div class="sk-bar" data-w="74"></div></div></li>
+            </ul>
+          </div>
+          <div class="skill-cat glass-card reveal">
+            <div class="sk-icon">🔋</div>
+            <h3>Embedded &amp; Energy Systems</h3>
+            <ul class="sk-list">
+              <li><span>Raspberry Pi 5 / ESP32 / Arduino</span><div class="sk-track"><div class="sk-bar" data-w="92"></div></div></li>
+              <li><span>HOMER Energy / RETScreen</span><div class="sk-track"><div class="sk-bar" data-w="82"></div></div></li>
+              <li><span>AI Vision Kit / Motion Sensors</span><div class="sk-track"><div class="sk-bar" data-w="85"></div></div></li>
+              <li><span>OptiSystem</span><div class="sk-track"><div class="sk-bar" data-w="65"></div></div></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Tag cloud for all tools -->
+        <div class="tech-cloud reveal">
+          <h3>All Technologies</h3>
+          <div class="tech-tags">
+            <span class="tech-tag cat-code">Python</span><span class="tech-tag cat-code">C</span><span class="tech-tag cat-code">C++</span>
+            <span class="tech-tag cat-code">MATLAB</span><span class="tech-tag cat-code">Simulink</span><span class="tech-tag cat-code">Git/GitHub</span>
+            <span class="tech-tag cat-ml">TensorFlow</span><span class="tech-tag cat-ml">PyTorch</span><span class="tech-tag cat-ml">Scikit-learn</span>
+            <span class="tech-tag cat-ml">OpenCV</span><span class="tech-tag cat-ml">NumPy</span><span class="tech-tag cat-ml">Pandas</span>
+            <span class="tech-tag cat-ml">SciPy</span><span class="tech-tag cat-ml">Matplotlib</span><span class="tech-tag cat-ml">Seaborn</span>
+            <span class="tech-tag cat-hw">Arduino Uno</span><span class="tech-tag cat-hw">Raspberry Pi 5</span><span class="tech-tag cat-hw">ESP32</span>
+            <span class="tech-tag cat-hw">AI Vision Kit</span><span class="tech-tag cat-hw">Motion Sensors</span>
+            <span class="tech-tag cat-eda">EasyEDA</span><span class="tech-tag cat-eda">Proteus</span><span class="tech-tag cat-eda">NI Multisim</span>
+            <span class="tech-tag cat-eda">AutoCAD</span><span class="tech-tag cat-eda">Cadence Virtuoso</span><span class="tech-tag cat-eda">SOLIDWORKS</span>
+            <span class="tech-tag cat-eda">CST Microwave Studio</span><span class="tech-tag cat-eda">OptiSystem</span>
+            <span class="tech-tag cat-energy">HOMER Energy</span><span class="tech-tag cat-energy">RETScreen</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════ RESEARCH ═══════ -->
+  <section id="research" class="section section-alt">
+    <div class="container">
+      <header class="sec-head">
+        <span class="sec-tag">06 — Research</span>
+        <h2 class="sec-title">Graduate Research Focus</h2>
+        <p class="sec-sub">Directions I aim to advance through MS/PhD study</p>
+      </header>
+      <div class="research-grid" id="researchGrid">
+        <div class="res-card glass-card reveal">
+          <div class="res-icon">🤖</div>
+          <h3>Digital Twin Systems</h3>
+          <p>Physics-informed machine learning for real-time digital replicas of power systems, with conformal uncertainty quantification and self-calibration.</p>
+        </div>
+        <div class="res-card glass-card reveal">
+          <div class="res-icon">☀️</div>
+          <h3>Renewable Energy &amp; Smart Grid</h3>
+          <p>Inverter anomaly detection, PV system optimization, microgrid control, and sustainable energy architecture for developing regions.</p>
+        </div>
+        <div class="res-card glass-card reveal">
+          <div class="res-icon">🧠</div>
+          <h3>Edge AI &amp; Computer Vision</h3>
+          <p>On-device AI inference with Raspberry Pi and ESP32, motion detection pipelines, and cloud-free embedded intelligence for industrial automation.</p>
+        </div>
+        <div class="res-card glass-card reveal">
+          <div class="res-icon">📡</div>
+          <h3>Fault Detection &amp; Diagnostics</h3>
+          <p>ML-assisted fault localization in transmission lines, RMS-based anomaly detection, and sensor-fusion frameworks for power infrastructure.</p>
+        </div>
+        <div class="res-card glass-card reveal">
+          <div class="res-icon">🔬</div>
+          <h3>RF &amp; Microwave Engineering</h3>
+          <p>Antenna design and simulation with CST Microwave Studio, exploring applications in wireless power transfer and smart sensor networks.</p>
+        </div>
+        <div class="res-card glass-card reveal">
+          <div class="res-icon">📊</div>
+          <h3>Data-Driven Engineering</h3>
+          <p>Scientific computing with Python, signal processing, and deep learning pipelines for real-world electrical systems and energy datasets.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════ PROJECTS ═══════ -->
+  <section id="projects" class="section">
+    <div class="container">
+      <header class="sec-head">
+        <span class="sec-tag">07 — Projects</span>
+        <h2 class="sec-title">Featured Work</h2>
+      </header>
+      <div class="projects-grid" id="projectsGrid"></div>
+    </div>
+  </section>
+
+  <!-- ═══════ ACHIEVEMENTS ═══════ -->
+  <section id="achievements" class="section section-alt">
+    <div class="container">
+      <header class="sec-head">
+        <span class="sec-tag">08 — Milestones</span>
+        <h2 class="sec-title">Achievements &amp; Activities</h2>
+      </header>
+      <div class="ach-grid">
+        <div class="ach-card glass-card reveal">
+          <div class="ach-icon">📝</div>
+          <h4>Research Publication</h4>
+          <p>Authored research on physics-informed digital twins with conformal uncertainty for PV systems — currently under review at TENSYMP 2026.</p>
+        </div>
+        <div class="ach-card glass-card reveal">
+          <div class="ach-icon">🏭</div>
+          <h4>Industry Internship</h4>
+          <p>Completed internship at Energypac Engineering Ltd. — gained IEC-standard HV testing experience and hands-on exposure to industrial power equipment.</p>
+        </div>
+        <div class="ach-card glass-card reveal">
+          <div class="ach-icon">🤖</div>
+          <h4>Edge AI System</h4>
+          <p>Built a complete on-device AI vision system using Raspberry Pi 5 and AI Camera Module — motion detection and classification without cloud dependency.</p>
+        </div>
+        <div class="ach-card glass-card reveal">
+          <div class="ach-icon">🌍</div>
+          <h4>Conference Participation</h4>
+          <p>Presented at "Digital Technologies: Opportunities &amp; Challenges in Combatting Climate Change" — engaging at the intersection of engineering and sustainability.</p>
+        </div>
+      </div>
+      <div class="creative-wrap reveal">
+        <h3 class="sub-title">Creative &amp; Community Work</h3>
+        <div class="creative-row">
+          <div class="cr-card glass-card"><span class="cr-icon">🎨</span><p>Designed digital posters and technical infographics for campus tech events</p></div>
+          <div class="cr-card glass-card"><span class="cr-icon">🛠️</span><p>Mentored juniors through hands-on Arduino mini-project workshops</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════ CONTACT ═══════ -->
+  <section id="contact" class="section">
+    <div class="container">
+      <header class="sec-head">
+        <span class="sec-tag">09 — Contact</span>
+        <h2 class="sec-title">Let's Connect</h2>
+        <p class="sec-sub">Open to MS/PhD opportunities, research collaborations, and academic discussions</p>
+      </header>
+      <div class="contact-grid">
+        <div class="contact-left reveal">
+          <a href="mailto:md.sazzad.eee@gmail.com" class="c-item glass-card">
+            <div class="c-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+            <div><h4>Email</h4><span id="cEmail">md.sazzad.eee@gmail.com</span></div>
+          </a>
+          <a href="tel:+8801303337052" class="c-item glass-card">
+            <div class="c-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.6 19.79 19.79 0 0 1 1.62 4.93 2 2 0 0 1 3.6 3h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l.85-.85a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+            <div><h4>Phone / WhatsApp</h4><span id="cPhone">+880 01303-337052</span></div>
+          </a>
+          <a href="https://sazzad-eee.github.io/Portfolio/" target="_blank" class="c-item glass-card">
+            <div class="c-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+            <div><h4>Portfolio</h4><span>sazzad-eee.github.io/Portfolio</span></div>
+          </a>
+          <div class="c-item glass-card">
+            <div class="c-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+            <div><h4>Location</h4><span id="cLocation">Banani, Block-B, Road 23/A, House 09, Dhaka 1213</span></div>
+          </div>
+        </div>
+        <div class="contact-right reveal glass-card">
+          <h3>Seeking Graduate Opportunities</h3>
+          <p>I'm actively looking for fully funded MS/PhD positions in Electrical Engineering, AI for Power Systems, Renewable Energy, or related fields. If you're a professor or program coordinator, I'd love to discuss research alignment.</p>
+          <a href="mailto:md.sazzad.eee@gmail.com" class="btn btn-primary magnetic" id="contactEmailBtn">
+            <span>Send an Email</span>
+            <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-row">
+        <a href="#hero" class="footer-logo"><span class="lb">&lt;</span>MSH<span class="lb">/&gt;</span></a>
+        <p>MD. Sazzad Hossain · B.Sc. EEE · AIUB Bangladesh</p>
+        <p class="copy">© 2025 · <a href="admin.html" class="admin-gear" title="Admin">⚙</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <div class="lightbox" id="lightbox">
+    <button class="lb-close" id="lbClose">×</button>
+    <img class="lb-img" id="lbImg" src="" alt="" />
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
