@@ -33,7 +33,8 @@ const DEFAULTS = {
   heroFirstName:'MD. Sazzad',
   heroLastName: 'Hossain',
   heroTagline:  'EEE Graduate · Digital Twin Researcher · Edge AI · Renewable Energy Systems',
-  typeRoles:    ['Electrical Engineer', 'Digital Twin Researcher', 'Edge AI Developer', 'Renewable Energy Systems Engineer', 'Physics-Informed ML Practitioner'],
+  typeRoles:    ['Electrical Engineer', 'Digital Twin Researcher', 'Edge AI Developer', 'Renewable Energy Systems Engineer'],
+  profileImgUrl:'profile.png',
   aboutPara1:   "I am Md. Sazzad Hossain, an Electrical & Electronic Engineering graduate from American International University-Bangladesh with versatile skills spanning practical electrical work and modern engineering tools. My research interests lie at the intersection of physics-informed machine learning, edge computing, and smart energy systems.",
   aboutPara2:   'With a publication under review at TENSYMP and industry experience at Energypac Engineering Ltd., I bridge academic research with real-world engineering. My goal is to grow as a well-rounded professional — adapting to new challenges and pursuing impactful graduate research.',
   chipEmailText:'md.sazzad.eee@gmail.com',
@@ -42,7 +43,7 @@ const DEFAULTS = {
   cEmail:       'md.sazzad.eee@gmail.com',
   cPhone:       '+880 01303-337052',
   cLocation:    'Banani, Block-B, Road 23/A, House 09, Dhaka 1213',
-  cvUrl:        '',
+  cvUrl:        'CV_Sazzad_Hossain.pdf',
   projects: [
     {
       id: 1,
@@ -118,7 +119,7 @@ async function applyData() {
     if (cvFileData) {
       btn.href = cvFileData; btn.download = 'Sazzad_Hossain_CV.pdf'; btn.target = '_blank';
     } else if (DATA.cvUrl) {
-      btn.href = DATA.cvUrl; btn.target = '_blank'; btn.download = '';
+      btn.href = DATA.cvUrl; btn.download = 'Sazzad_Hossain_CV.pdf';
     } else {
       btn.addEventListener('click', e => { e.preventDefault(); alert('CV not uploaded yet. Check back soon!'); });
     }

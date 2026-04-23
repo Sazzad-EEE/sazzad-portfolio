@@ -358,8 +358,9 @@ svg { display: block; width: 18px; height: 18px; fill: none; stroke: currentColo
   position: relative; width: 260px; margin: 0 auto 28px;
 }
 .profile-photo {
-  width: 100%; aspect-ratio: 3/4; object-fit: cover;
+  width: 100%; aspect-ratio: 3/4; object-fit: contain; object-position: center top;
   border-radius: var(--radius); border: 2px solid var(--border);
+  background: linear-gradient(160deg, rgba(0,212,255,0.06) 0%, rgba(124,58,237,0.08) 100%);
   position: relative; z-index: 1;
 }
 .profile-photo.hidden { display: none; }
